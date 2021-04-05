@@ -17,7 +17,7 @@ static size_t	ft_strs_nb(char const *s, const char *delimiters)
 	size_t	i;
 	size_t	x;
 
-	if (!s[0])
+	if (!s[0] || !delimiters)
 		return (0);
 	i = 0;
 	x = 0;
@@ -105,7 +105,7 @@ int	main(void)
 	size_t	i;
 
 	i = 0;
-	tab = ft_split(", hello, sp  .9..  lit ,,,,  th,,,is,plz, , ", ", ");
+	tab = ft_split(", hello, baby  .9..  you ,,,,  are,,,awsome,, , ", ", ");
 	if (!tab[0])
 		ft_putendl_fd("ok\n", 1);
 	while (tab[i] != NULL)
