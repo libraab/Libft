@@ -11,10 +11,11 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-static	int			ft_itoa_size(int n)
+static	int	ft_itoa_size(int n)
 {
-	int				size;
-	int				neg;
+	int	size;
+	int	neg;
+
 	size = 0;
 	neg = 0;
 	if (n < 0 && n > -2147483648)
@@ -34,31 +35,50 @@ static	int			ft_itoa_size(int n)
 	}
 	return (size);
 }
-char				*ft_itoa(int n)
+
+static	int	ft_makepos(int x)
 {
-	char			*str;
+	if (x < 0)
+		return (-x);
+	else
+		return (x);
+}
+
+static	int	ft_isneg(int x)
+{
+	if (x < 0)
+		return (1);
+	else
+		return (0);
+}
+
+char	*ft_itoa(int n)
+{
+	char			*s;
 	int				i;
 	int				size;
 	int				neg;
 	unsigned int	tmp;
-	size = ft_itoa_size(n);
-	neg = (n < 0 ? 1 : 0);
+
 	i = 1;
-	if (!((str = (char *)malloc(sizeof(char) * ft_itoa_size(n) + 1))))
+	size = ft_itoa_size(n);
+	neg = ft_isneg(n);
+	tmp = ft_makepos(n);
+	s = (char *)malloc(sizeof(char) * ft_itoa_size(n) + 1);
+	if (!s)
 		return (NULL);
-	tmp = (n < 0 ? -n : n);
 	if (tmp == 0)
-		str[tmp] = '0';
+		s[tmp] = '0';
 	while (tmp >= 1)
 	{
-		str[size - i] = (tmp % 10) + '0';
+		s[size - i] = (tmp % 10) + '0';
 		tmp /= 10;
 		i++;
 	}
 	if (neg)
-		*str = '-';
-	str[size] = '\0';
-	return (str);
+		*s = '-';
+	s[size] = '\0';
+	return (s);
 }
 /*
 #include <stdio.h>

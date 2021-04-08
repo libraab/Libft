@@ -1,30 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouhlel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/20 16:24:44 by abouhlel          #+#    #+#             */
-/*   Updated: 2021/03/30 17:10:58 by abouhlel         ###   ########.fr       */
+/*   Created: 2021/04/07 12:27:34 by abouhlel          #+#    #+#             */
+/*   Updated: 2021/04/07 12:27:35 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-char	*ft_strcpy(char *dst, const char *src)
-{
-	size_t	i;
 
-	i = 0;
-	while (src[i] != '\0')
-	{
-		dst[i] = src[i];
-		i++;
-	}
-	while (dst[i] != '\0')
-	{
-		dst[i] = '\0';
-		i++;
-	}
-	return (dst);
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
+{
+	del(lst->content);
+	free(lst);
 }

@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abouhlel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/25 13:52:36 by abouhlel          #+#    #+#             */
-/*   Updated: 2021/03/30 17:09:54 by abouhlel         ###   ########.fr       */
+/*   Created: 2021/04/06 12:52:49 by abouhlel          #+#    #+#             */
+/*   Updated: 2021/04/06 12:58:22 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_strcmp(const char *s1, const char *s2)
+void	*ft_calloc(size_t count, size_t size)
 {
-	size_t	i;
+	char	*s;
 
-	i = 0;
-	while (s1[i] == s2[i] && s1[i] != '\0' && s2[i] != '\0')
-		i++;
-	return (s1[i] - s2[i]);
+	s = malloc(count * size);
+	if (!s)
+		return (0);
+	ft_memset(s, 0, size * count);
+	return (s);
 }
-/*#include <stdio.h>
-int main ()
-{
-	char a[] = "HdhvqcjdhvcqjohO";
-	char b[] = "HeLjbckqsbjckdlO";
-	printf("%d", ft_strcmp(b, a));
-	printf("\n");
-	printf("%d", strcmp(b, a));
-}*/

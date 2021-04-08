@@ -1,68 +1,54 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strsplit.c                                      :+:      :+:    :+:   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouhlel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 09:05:08 by abouhlel          #+#    #+#             */
-/*   Updated: 2021/04/02 11:50:46 by abouhlel         ###   ########.fr       */
+/*   Updated: 2021/04/07 15:52:21 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	ft_strs_nb(char const *s, const char *delimiters)
+static int	count_words(char const *s, char c)
 {
-	size_t	i;
-	size_t	x;
+	int		i;
+	int		words;
 
-	if (!s[0] || !delimiters)
-		return (0);
+	words = 0;
 	i = 0;
-	x = 0;
-	while (s[i] && ft_strchr(delimiters, s[i]))
-		i++;
 	while (s[i])
 	{
-		if (ft_strchr(delimiters, s[i]))
-		{
-			x++;
-			while (s[i] && ft_strchr(delimiters, s[i]))
-				i++;
-			continue ;
-		}
+		if (s[i] != c && (s[i + 1] == c || s[i + 1] == '\0'))
+			words++;
 		i++;
 	}
-	if (!ft_strchr(delimiters, s[i - 1]))
-		x++;
-	return (x);
+	return (words);
 }
 
-static void	ft_get_next_str(char **next_s, size_t *s_len, const char *delimiters)
+static int	words_len(char const *s, char c)
 {
-	size_t	i;
+	int		i;
+	int		len;
 
-	*next_s += *s_len;
-	*s_len = 0;
 	i = 0;
-	while (**next_s && ft_strchr(delimiters, **next_s))
-		(*next_s)++;
-	while ((*next_s)[i])
+	len = 0;
+	while (s[i] != c && s[i] != '\0')
 	{
-		if (ft_strchr(delimiters, (*next_s)[i]))
-			return ;
-		(*s_len)++;
 		i++;
+		len++;
 	}
+	return (len);
 }
 
-char	**ft_freed(char **tab)
+static void	*freememory(char **tab, int words)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
-	while (tab[i])
+	while (i < words)
 	{
 		free(tab[i]);
 		i++;
@@ -71,46 +57,41 @@ char	**ft_freed(char **tab)
 	return (NULL);
 }
 
-char	**ft_split(char const *s, const char *delimiters)
+static char	**creat_new_tab(char const *s, int words, char c, char **newtab)
 {
-	char	**tab;
-	char	*next_str;
-	size_t	next_str_len;
-	size_t	nb_strs;
-	size_t	i;
+	int		i;
+	int		j;
+	int		len;
 
-	nb_strs = ft_strs_nb(s, delimiters);
-	tab = malloc(sizeof(char *) * (nb_strs + 1));
-		if (!tab)
-		return (NULL);
-	i = 0;
-	next_str = (char *)s;
-	next_str_len = 0;
-	while (i < nb_strs)
+	i = -1;
+	while (++i < words)
 	{
-		ft_get_next_str(&next_str, &next_str_len, delimiters);
-		tab[i] = malloc(sizeof(char) * (next_str_len + 1));
-			if (!tab)
-			return (ft_freed(tab));
-		ft_strlcpy(tab[i], next_str, next_str_len + 1);
-		i++;
+		while (*s == c)
+			s++;
+		len = words_len(s, c);
+		newtab[i] = (char *)malloc(sizeof(char) * (len + 1));
+		if (!newtab[i])
+			return (freememory(newtab, i));
+		j = 0;
+		while (j < len)
+			newtab[i][j++] = *s++;
+		newtab[i][j] = '\0';
 	}
-	tab[i] = NULL;
-	return (tab);
+	newtab[i] = NULL;
+	return (newtab);
 }
 
-int	main(void)
+char	**ft_split(char	const *s, char c)
 {
-	char	**tab;
-	size_t	i;
+	char	**newtab;
+	int		words;
 
-	i = 0;
-	tab = ft_split(", hello, baby  .9..  you ,,,,  are,,,awsome,, , ", ", ");
-	if (!tab[0])
-		ft_putendl_fd("ok\n", 1);
-	while (tab[i] != NULL)
-	{
-		ft_putendl_fd(tab[i], 1);
-		i++;
-	}
+	if (!s)
+		return (NULL);
+	words = count_words(s, c);
+	newtab = (char **)malloc(sizeof(char *) * (words + 1));
+	if (!newtab)
+		return (NULL);
+	newtab = creat_new_tab(s, words, c, newtab);
+	return (newtab);
 }

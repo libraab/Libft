@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouhlel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/26 10:39:49 by abouhlel          #+#    #+#             */
-/*   Updated: 2021/03/30 16:17:39 by abouhlel         ###   ########.fr       */
+/*   Created: 2021/04/07 12:27:48 by abouhlel          #+#    #+#             */
+/*   Updated: 2021/04/07 15:49:26 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-void	ft_putstr(char *str)
-{
-	int	i;
 
-	i = 0;
-	while (str[i] != '\0')
-	{
-		ft_putchar(str[i]);
-		i++;
-	}
+t_list	*ft_lstnew(void *content)
+{
+	t_list	*lst;
+
+	lst = malloc(sizeof(lst));
+	if (!lst)
+		return (0);
+	lst->next = 0;
+	lst->content = content;
+	return (lst);
 }
