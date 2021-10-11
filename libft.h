@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 09:43:16 by abouhlel          #+#    #+#             */
-/*   Updated: 2021/04/07 16:20:17 by abouhlel         ###   ########.fr       */
+/*   Updated: 2021/10/11 16:54:45 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	*ft_memccpy(void *dst, const void *src, int c, size_t n);
 void	*ft_memchr(const void *s, int c, size_t n);
 void	*ft_memmove(void *dst, const void *src, size_t len);
 void	*ft_memset(void	*b, int c, size_t len);
+void	ft_striteri(char *s, void (*f)(unsigned int, char *));
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_putendl_fd(char *s, int fd);
