@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouhlel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 11:53:42 by abouhlel          #+#    #+#             */
-/*   Updated: 2021/10/11 17:27:08 by abouhlel         ###   ########.fr       */
+/*   Updated: 2021/11/29 11:23:42 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,9 @@ int	ft_atoi(const char *str)
 	}
 	while (str[i] >= '0' && str[i] <= '9')
 	{
-		a = a * 10 + (str[i] - 48);
-		i++;
+		a = a * 10 + (str[i++] - 48);
 		if (a >= 922337203685477587)
 			return (ft_isneg(b));
 	}
 	return (a * b);
 }
-/*#include <stdlib.h>
-#include <stdio.h>
-int main()
-{
-	 char a[] = "1844674407375";
-	 printf("%d\n", ft_atoi(a));
-	 printf("%d\n\n", atoi(a));
- }*/

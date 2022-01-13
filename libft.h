@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 09:43:16 by abouhlel          #+#    #+#             */
-/*   Updated: 2021/10/21 16:23:14 by abouhlel         ###   ########.fr       */
+/*   Updated: 2021/12/21 11:25:57 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int		ft_isalnum(int c);
 int		ft_isalpha(int c);
 int		ft_isascii(int c);
 int		ft_isdigit(int c);
+int		ft_str_isdigit(char *s);
 int		ft_isprint(int c);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
@@ -48,7 +49,7 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strrchr(const char *s, int c);
-char	*ft_strcat(char *s1, const char *s2);
+char	*ft_strcat(char *s1, char *s2);
 char	*ft_strncat(char *s1, const char *s2, size_t n);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strncpy(char *dst, const char *src, size_t len);
@@ -61,10 +62,13 @@ size_t	ft_strlen(const char *s);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
-char	*ft_strtrim(char const *s1, char const *set);
-char	**ft_split(char const *s, char c);
+char	*ft_strtrim(char *s1, char *set);
+char	**ft_split(char *s, char c);
+void	ft_putstr(char *s);
 
-///////////////// * B O N U S* ////////////////////////////////////////////
+//*****************************************************************************
+//						* B O N U S *										 //
+//*****************************************************************************
 
 t_list	*ft_lstnew(void *content);
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));

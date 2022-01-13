@@ -6,11 +6,12 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 09:05:29 by abouhlel          #+#    #+#             */
-/*   Updated: 2021/04/07 15:43:57 by abouhlel         ###   ########.fr       */
+/*   Updated: 2021/11/30 16:05:17 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
 static int	ft_strchr2(char const *s, char c)
 {
@@ -26,7 +27,7 @@ static int	ft_strchr2(char const *s, char c)
 	return (0);
 }
 
-char	*ft_strtrim(char const *s1, char const *set)
+char	*ft_strtrim(char *s1, char *set)
 {
 	char	*str;
 	size_t	i;
@@ -41,7 +42,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	end = ft_strlen(s1);
 	while (end > start && ft_strchr2(set, s1[end - 1]))
 		end--;
-	str = (char *)malloc(sizeof(*s1) * (end - start + 1));
+	str = ft_calloc(sizeof(char), (end - start + 1));
 	if (!str)
 		return (NULL);
 	i = 0;
@@ -50,10 +51,3 @@ char	*ft_strtrim(char const *s1, char const *set)
 	str[i] = 0;
 	return (str);
 }
-/*#include <stdio.h>
-int main()
-{
-	char a[] = "ABCBhello_worldBAC";
-	char b[] = "ABC";
-	printf("%s", ft_strtrim(a, b));
-}*/
